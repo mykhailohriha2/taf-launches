@@ -1,0 +1,7 @@
+<suite name="UI main Suite">
+    <test name="Login Test">
+        <classes>
+            <class name="tests.ui.LoginUiTest" />
+        </classes>
+    </test>
+</suite>

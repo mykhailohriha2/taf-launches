@@ -2,6 +2,7 @@ package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
 import com.reportportal.launches.core.Generic;
+import com.reportportal.launches.model.User;
 
 
 public class LoginPage {
@@ -22,9 +23,9 @@ public class LoginPage {
 		return generic.getByLocator(loginBtn);
 	}
 
-	public void login(String username, String password) {
-		generic.fill(getLoginField(), username);
-		generic.fill(getPasswordField(), password);
+	public void login(User user) {
+		generic.fill(getLoginField(), user.getName());
+		generic.fill(getPasswordField(), user.getPassword());
 		generic.click(getLoginBtn());
 	}
 }

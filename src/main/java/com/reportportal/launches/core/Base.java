@@ -1,6 +1,7 @@
 package com.reportportal.launches.core;
 
 import com.microsoft.playwright.*;
+import com.reportportal.launches.PropertiesController;
 
 
 public class Base {
@@ -15,27 +16,17 @@ public class Base {
 	}
 
 	private static void setBrowser() {
-		// properties
-		String binary = "chromium";
-		String channel = "chrome";
-		boolean headless = false;
+		String binary = PropertiesController.getBrowserPropertyByKey("binary");
+		String channel = PropertiesController.getBrowserPropertyByKey("channel");
+		String headless = PropertiesController.getBrowserPropertyByKey("headless");
 		switch (binary) {
-			case "chromium":
-				browser.set(getPlaywright().chromium().launch(
-						new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.valueOf(headless))));
-				break;
-			case "webkit":
-				browser.set(getPlaywright().webkit().launch(
-						new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.valueOf(headless))));
-				break;
-			case "firefox":
-				browser.set(getPlaywright().webkit().launch(
-						new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.valueOf(headless))));
-				break;
-			default:
-				browser.set(getPlaywright().chromium().launch(
-						new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.valueOf(headless))));
-				break;
+			case "chromium" -> browser.set(getPlaywright().chromium().launch(
+					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.parseBoolean(headless))));
+			case "webkit" -> browser.set(getPlaywright().webkit().launch(
+					new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(headless))));
+			case "firefox" -> browser.set(getPlaywright().firefox().launch(
+					new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(headless))));
+			default -> throw new IllegalArgumentException("Invalid browser: " + browser);
 		}
 	}
 
@@ -74,7 +65,7 @@ public class Base {
 		if (base.get() == null) {
 			base.set(new Base());
 		}
-		return base.get().getPage();
+		return Base.getPage();
 	}
 
 }

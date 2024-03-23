@@ -1,4 +1,4 @@
-package ui;
+package tests.base;
 
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -8,11 +8,11 @@ import com.reportportal.launches.pages.LoginPage;
 import com.reportportal.launches.pages.MainPage;
 
 
-public class LoginUiTest {
-	Generic generic;
-	LoginPage loginPage;
-	MainPage mainPage;
-	SoftAssert softAssert;
+public abstract class BaseUiTest {
+	protected Generic generic;
+	protected LoginPage loginPage;
+	protected MainPage mainPage;
+	protected SoftAssert softAssert;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -24,14 +24,6 @@ public class LoginUiTest {
 	@BeforeMethod
 	public void beforeMethod() {
 		generic = new Generic();
-	}
-
-	@Test
-	public void validateUserIsAbleToLogin() {
-		generic.navigate("http://localhost:8080/");
-		loginPage.login("superadmin", "erebus");
-		softAssert.assertEquals("", "");
-		softAssert.assertAll();
 	}
 
 	@AfterMethod
