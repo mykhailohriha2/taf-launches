@@ -1,5 +1,6 @@
 package tests.base;
 
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -12,13 +13,13 @@ public abstract class BaseUiTest {
 	protected Generic generic;
 	protected LoginPage loginPage;
 	protected MainPage mainPage;
-	protected SoftAssert softAssert;
+	protected SoftAssertions softAssert;
 
 	@BeforeClass
 	public void beforeClass() {
 		loginPage = new LoginPage();
 		mainPage = new MainPage();
-		softAssert = new SoftAssert();
+		softAssert = new SoftAssertions();
 	}
 
 	@BeforeMethod

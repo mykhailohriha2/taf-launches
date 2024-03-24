@@ -1,0 +1,7 @@
+<suite name="API main Suite">
+    <test name="Report Portal Services Test">
+        <classes>
+            <class name="tests.api.ReportPortalServicesApiTest"/>
+        </classes>
+    </test>
+</suite>

@@ -13,7 +13,7 @@ public class LoginUiTest extends BaseUiTest {
 	public void validateUserIsAbleToLogin() {
 		generic.navigate("http://localhost:8080/");
 		loginPage.login(UserUtils.getAdminUser());
-		softAssert.assertEquals(mainPage.getNotificationText(), "Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 }
