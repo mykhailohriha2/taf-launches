@@ -1,31 +1,36 @@
 package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
-import com.reportportal.launches.core.Generic;
+import com.microsoft.playwright.Page;
 import com.reportportal.launches.model.User;
+import com.reportportal.launches.pages.base.BasePage;
 
 
-public class LoginPage {
-	private Generic generic = new Generic("");
+public class LoginPage extends BasePage {
+
+	public LoginPage(Page page) {
+		super(page);
+	}
+
 	private String loginField = "[name='login']";
 	private String passwordField = "[name='password']";
 	private String loginBtn = "[type='submit']";
 
 	public Locator getLoginField() {
-		return generic.getByLocator(loginField);
+		return getByLocator(loginField);
 	}
 
 	public Locator getPasswordField() {
-		return generic.getByLocator(passwordField);
+		return getByLocator(passwordField);
 	}
 
 	public Locator getLoginBtn() {
-		return generic.getByLocator(loginBtn);
+		return getByLocator(loginBtn);
 	}
 
 	public void login(User user) {
-		generic.fill(getLoginField(), user.getName());
-		generic.fill(getPasswordField(), user.getPassword());
-		generic.click(getLoginBtn());
+		fill(getLoginField(), user.getName());
+		fill(getPasswordField(), user.getPassword());
+		click(getLoginBtn());
 	}
 }

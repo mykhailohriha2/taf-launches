@@ -6,8 +6,8 @@ import com.reportportal.launches.utils.UserUtils;
 
 import tests.base.Base;
 
-
-public class LoginUiTest extends Base {
+// This test class was created only to test parallel execution. Will be deleted after expanding the test suite
+public class LoginUiTest2 extends Base {
 
 	@Test
 	public void validateUserIsAbleToLogin() {

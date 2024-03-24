@@ -1,15 +1,20 @@
 package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
-import com.reportportal.launches.core.Generic;
+import com.microsoft.playwright.Page;
+import com.reportportal.launches.pages.base.BasePage;
 
 
-public class MainPage {
-	private Generic generic = new Generic("");
+public class MainPage extends BasePage {
+
+	public MainPage(Page page) {
+		super(page);
+	}
+
 	private String notification = "#notification-root div p";
 
 	public Locator getNotificationTooltip() {
-		return generic.getByLocator(notification);
+		return getByLocator(notification);
 	}
 
 	public String getNotificationText() {
