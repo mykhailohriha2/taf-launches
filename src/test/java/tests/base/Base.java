@@ -65,7 +65,13 @@ public class Base {
 	}
 
 	@AfterMethod
-	public void close() {
+	public void closeContext() {
 		page.context().close();
+	}
+
+	@AfterClass
+	public void closeBrowser() {
+		browser.close();
+		playwright.close();
 	}
 }
