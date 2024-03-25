@@ -1,6 +1,4 @@
-package com.reportportal.launches.datastructures;
-
-import static com.reportportal.launches.PropertiesController.getEnvPropertyByKey;
+package com.reportportal.launches.datastructures.webapi;
 
 import com.reportportal.launches.PropertiesController;
 
