@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 
 import com.reportportal.launches.model.User;
 
-import tests.base.Base;
+import tests.base.BaseUiTest;
 
 
-public class LoginUiTest extends Base {
+public class LoginUiTest extends BaseUiTest {
 
 	@DataProvider(name = "user type")
 	public Object[] users() {

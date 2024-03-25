@@ -4,10 +4,10 @@ import org.testng.annotations.Test;
 
 import com.reportportal.launches.utils.UserUtils;
 
-import tests.base.Base;
+import tests.base.BaseUiTest;
 
 // This test class was created only to test parallel execution. Will be deleted after expanding the test suite
-public class LoginUiTest2 extends Base {
+public class LoginUiTest2 extends BaseUiTest {
 
 	@Test
 	public void validateUserIsAbleToLogin() {
