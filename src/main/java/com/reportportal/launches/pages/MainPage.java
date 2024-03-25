@@ -11,7 +11,7 @@ public class MainPage extends BasePage {
 		super(page);
 	}
 
-	private String notification = "#notification-root div p";
+	private final String notification = "#notification-root div p";
 
 	public Locator getNotificationTooltip() {
 		return getByLocator(notification);

@@ -14,7 +14,7 @@ import com.reportportal.launches.pages.MainPage;
 
 @Listeners(ExtentReportListener.class)
 public abstract class BaseUiTest {
-	private PlaywrightFactory playwrightFactory = new PlaywrightFactory();
+	private final PlaywrightFactory playwrightFactory = new PlaywrightFactory();
 
 	protected SoftAssertions softAssert;
 

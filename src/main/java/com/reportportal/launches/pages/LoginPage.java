@@ -12,9 +12,9 @@ public class LoginPage extends BasePage {
 		super(page);
 	}
 
-	private String loginField = "[name='login']";
-	private String passwordField = "[name='password']";
-	private String loginBtn = "[type='submit']";
+	private final String loginField = "[name='login']";
+	private final String passwordField = "[name='password']";
+	private final String loginBtn = "[type='submit']";
 
 	public Locator getLoginField() {
 		return getByLocator(loginField);

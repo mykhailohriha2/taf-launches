@@ -21,8 +21,8 @@ public class ExtentReportListener implements ITestListener {
 	private static final String FILE_NAME = "TestExecutionReport.html";
 	private static final Logger log = LogManager.getLogger(ExtentReportListener.class);
 
-	private static ExtentReports extent = init();
-	public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+	private static final ExtentReports extent = init();
+	private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	private static ExtentReports extentReports;
 
 
