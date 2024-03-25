@@ -1,9 +1,10 @@
-package com.reportportal.launches;
+package com.reportportal.launches.factory;
 
 import java.nio.file.Paths;
 import java.util.Base64;
 
 import com.microsoft.playwright.*;
+import com.reportportal.launches.config.PropertiesController;
 
 
 public class PlaywrightFactory {

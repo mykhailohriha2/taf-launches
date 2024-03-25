@@ -1,6 +1,6 @@
 package com.reportportal.launches.utils;
 
-import static com.reportportal.launches.PropertiesController.getEnvPropertyByKey;
+import static com.reportportal.launches.config.PropertiesController.getEnvPropertyByKey;
 
 import com.reportportal.launches.model.User;
 

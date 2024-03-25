@@ -1,4 +1,4 @@
-package com.reportportal.launches;
+package com.reportportal.launches.config;
 
 import java.util.ResourceBundle;
 

@@ -1,6 +1,6 @@
 package com.reportportal.launches.datastructures.webapi;
 
-import com.reportportal.launches.PropertiesController;
+import com.reportportal.launches.config.PropertiesController;
 
 
 public enum RequestPaths {
