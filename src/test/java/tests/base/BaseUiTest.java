@@ -7,10 +7,12 @@ import org.testng.annotations.*;
 
 import com.reportportal.launches.PlaywrightFactory;
 import com.reportportal.launches.PropertiesController;
+import com.reportportal.launches.listeners.ExtentReportListener;
 import com.reportportal.launches.pages.LoginPage;
 import com.reportportal.launches.pages.MainPage;
 
 
+@Listeners(ExtentReportListener.class)
 public abstract class BaseUiTest {
 	private PlaywrightFactory playwrightFactory = new PlaywrightFactory();
 

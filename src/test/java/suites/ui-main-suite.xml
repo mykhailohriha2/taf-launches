@@ -1,7 +1,10 @@
 <suite name="UI main Suite">
+    <listeners>
+        <listener class-name="com.reportportal.launches.listeners.ExtentReportListener"/>
+    </listeners>
     <test name="Login Test">
         <classes>
-            <class name="tests.ui.LoginUiTest" />
+            <class name="tests.ui.LoginUiTest"/>
         </classes>
     </test>
 </suite>

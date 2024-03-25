@@ -1,7 +1,5 @@
 package com.reportportal.launches.datastructures;
 
-import static com.reportportal.launches.PropertiesController.getEnvPropertyByKey;
-
 import com.reportportal.launches.PropertiesController;
 
 
