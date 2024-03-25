@@ -1,5 +1,6 @@
 package tests.ui;
 
+import static com.reportportal.launches.listeners.Messages.SIGNED_IN_SUCCESSFULLY;
 import static com.reportportal.launches.utils.UserUtils.getAdminUser;
 import static com.reportportal.launches.utils.UserUtils.getDefaultUser;
 
@@ -21,7 +22,7 @@ public class LoginUiTest extends BaseUiTest {
 	@Test(dataProvider = "user type")
 	public void validateUserIsAbleToLogin(User user) {
 		loginPage.login(user);
-		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		softAssert.assertAll();
 	}
 }

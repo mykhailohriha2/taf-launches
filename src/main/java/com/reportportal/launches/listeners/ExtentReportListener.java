@@ -7,6 +7,8 @@ import java.nio.file.*;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.*;
 
 import com.aventstack.extentreports.*;
@@ -17,9 +19,10 @@ public class ExtentReportListener implements ITestListener {
 
 	private static final String OUTPUT_FOLDER = "./build/";
 	private static final String FILE_NAME = "TestExecutionReport.html";
+	private static final Logger log = LogManager.getLogger(ExtentReportListener.class);
 
 	private static ExtentReports extent = init();
-	public static ThreadLocal<ExtentTest> test = new ThreadLocal<ExtentTest>();
+	public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	private static ExtentReports extentReports;
 
 
@@ -41,12 +44,12 @@ public class ExtentReportListener implements ITestListener {
 
 	@Override
 	public synchronized void onStart(ITestContext context) {
-		System.out.println("Test Suite started!");
+		log.info("Test Suite started " + context.getSuite().getName());
 	}
 
 	@Override
 	public synchronized void onFinish(ITestContext context) {
-		System.out.println(("Test Suite is ending!"));
+		log.info("Test Suite is ending " + context.getSuite().getName());
 		extent.flush();
 		test.remove();
 	}
@@ -58,7 +61,7 @@ public class ExtentReportListener implements ITestListener {
 		int last = qualifiedName.lastIndexOf(".");
 		int mid = qualifiedName.substring(0, last).lastIndexOf(".");
 		String className = qualifiedName.substring(mid + 1, last);
-		System.out.println(methodName + " started!");
+		log.info(methodName + " started!");
 		ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),
 				result.getMethod().getDescription());
 		extentTest.assignCategory(result.getTestContext().getSuite().getName());
@@ -68,25 +71,25 @@ public class ExtentReportListener implements ITestListener {
 	}
 
 	public synchronized void onTestSuccess(ITestResult result) {
-		System.out.println((result.getMethod().getMethodName() + " passed!"));
+		log.info(result.getMethod().getMethodName() + " passed!");
 		test.get().pass("Test passed");
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
 	public synchronized void onTestFailure(ITestResult result) {
-		System.out.println((result.getMethod().getMethodName() + " failed!"));
+		log.info(result.getMethod().getMethodName() + " failed!");
 		test.get().fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot(),
 				result.getMethod().getMethodName()).build());
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
 	public synchronized void onTestSkipped(ITestResult result) {
-		System.out.println((result.getMethod().getMethodName() + " skipped!"));
+		log.info(result.getMethod().getMethodName() + " skipped!");
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
 	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		System.out.println(("onTestFailedButWithinSuccessPercentage for " + result.getMethod().getMethodName()));
+		log.info("onTestFailedButWithinSuccessPercentage for " + result.getMethod().getMethodName());
 	}
 
 	private Date getTime(long millis) {

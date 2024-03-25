@@ -1,7 +1,7 @@
 package com.reportportal.launches.services;
 
-import static com.reportportal.launches.datastructures.RequestPaths.BASE_URL;
-import static com.reportportal.launches.datastructures.RequestPaths.REPORT_PORTAL_SERVICES;
+import static com.reportportal.launches.datastructures.webapi.RequestPaths.BASE_URL;
+import static com.reportportal.launches.datastructures.webapi.RequestPaths.REPORT_PORTAL_SERVICES;
 
 import com.reportportal.launches.services.base.BaseApiService;
 

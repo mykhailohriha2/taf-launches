@@ -1,4 +1,4 @@
-package com.reportportal.launches.datastructures;
+package com.reportportal.launches.datastructures.webapi;
 
 import com.reportportal.launches.PropertiesController;
 
