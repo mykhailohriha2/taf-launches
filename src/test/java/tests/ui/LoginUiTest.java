@@ -1,6 +1,6 @@
 package tests.ui;
 
-import static com.reportportal.launches.listeners.Messages.SIGNED_IN_SUCCESSFULLY;
+import static com.reportportal.launches.datastructures.webapi.Messages.SIGNED_IN_SUCCESSFULLY;
 import static com.reportportal.launches.utils.UserUtils.getAdminUser;
 import static com.reportportal.launches.utils.UserUtils.getDefaultUser;
 

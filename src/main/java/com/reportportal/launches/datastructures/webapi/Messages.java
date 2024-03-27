@@ -1,4 +1,4 @@
-package com.reportportal.launches.listeners;
+package com.reportportal.launches.datastructures.webapi;
 
 public class Messages {
 	private Messages() {
