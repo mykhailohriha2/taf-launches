@@ -1,8 +1,8 @@
 package tests.ui;
 
 import static com.reportportal.launches.datastructures.Messages.SIGNED_IN_SUCCESSFULLY;
-import static com.reportportal.launches.utils.UserFactory.getAdminUser;
-import static com.reportportal.launches.utils.UserFactory.getDefaultUser;
+import static com.reportportal.launches.factories.UserFactory.getAdminUser;
+import static com.reportportal.launches.factories.UserFactory.getDefaultUser;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

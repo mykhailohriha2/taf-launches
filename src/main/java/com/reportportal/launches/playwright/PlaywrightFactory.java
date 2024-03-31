@@ -1,10 +1,11 @@
-package com.reportportal.launches.factory;
+package com.reportportal.launches.playwright;
+
+import static com.reportportal.launches.config.BrowserConfigProvider.getBrowserConfig;
 
 import java.nio.file.Paths;
 import java.util.Base64;
 
 import com.microsoft.playwright.*;
-import com.reportportal.launches.config.PropertiesProvider;
 
 
 public class PlaywrightFactory {
@@ -19,16 +20,16 @@ public class PlaywrightFactory {
 	}
 
 	public void setBrowser() {
-		String binary = PropertiesProvider.getBrowserPropertyByKey("binary");
-		String channel = PropertiesProvider.getBrowserPropertyByKey("channel");
-		String headless = PropertiesProvider.getBrowserPropertyByKey("headless");
+		String binary = getBrowserConfig().binary();
+		String channel = getBrowserConfig().channel();
+		boolean headless = getBrowserConfig().headless();
 		switch (binary) {
 			case "chromium" -> browser.set(playwright.get().chromium().launch(
-					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.parseBoolean(headless))));
-			case "webkit" -> browser.set(playwright.get().webkit().launch(
-					new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(headless))));
-			case "firefox" -> browser.set(playwright.get().firefox().launch(
-					new BrowserType.LaunchOptions().setHeadless(Boolean.parseBoolean(headless))));
+					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(headless)));
+			case "webkit" ->
+					browser.set(playwright.get().webkit().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
+			case "firefox" ->
+					browser.set(playwright.get().firefox().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
 			default -> throw new IllegalArgumentException("Invalid browser: " + browser);
 		}
 	}

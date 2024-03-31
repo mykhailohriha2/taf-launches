@@ -2,7 +2,7 @@ package tests.ui;
 
 import org.testng.annotations.Test;
 
-import com.reportportal.launches.utils.UserFactory;
+import com.reportportal.launches.factories.UserFactory;
 
 import tests.base.BaseUiTest;
 

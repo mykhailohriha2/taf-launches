@@ -1,13 +1,13 @@
 package com.reportportal.launches.datastructures.webapi;
 
-import com.reportportal.launches.config.PropertiesProvider;
+import static com.reportportal.launches.config.EnvironmentConfigProvider.getEnvConfig;
 
 import lombok.Getter;
 
 
 @Getter
 public enum RequestPath {
-	BASE_URL(PropertiesProvider.getEnvPropertyByKey("baseUrl")), REPORT_PORTAL_SERVICES("/composite/info");
+	BASE_URL(getEnvConfig().baseUrl()), REPORT_PORTAL_SERVICES("/composite/info");
 
 	private final String path;
 
