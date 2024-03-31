@@ -9,14 +9,18 @@ import com.microsoft.playwright.*;
 
 
 public class PlaywrightFactory {
+	private static final ThreadLocal<PlaywrightContext> playwrightContext = new ThreadLocal<>();
 
-	private static ThreadLocal<Playwright> playwright = new ThreadLocal<>();
-	private static ThreadLocal<Browser> browser = new ThreadLocal<>();
-	private static ThreadLocal<BrowserContext> browserContext = new ThreadLocal<>();
-	private static ThreadLocal<Page> page = new ThreadLocal<>();
+	public PlaywrightFactory() {
+		playwrightContext.set(new PlaywrightContext());
+		setPlaywright();
+		setBrowser();
+		setBrowserContext();
+		setPage();
+	}
 
 	public void setPlaywright() {
-		playwright.set(Playwright.create());
+		playwrightContext.get().setPlaywright(Playwright.create());
 	}
 
 	public void setBrowser() {
@@ -24,38 +28,38 @@ public class PlaywrightFactory {
 		String channel = getBrowserConfig().channel();
 		boolean headless = getBrowserConfig().headless();
 		switch (binary) {
-			case "chromium" -> browser.set(playwright.get().chromium().launch(
+			case "chromium" -> playwrightContext.get().setBrowser(getPlaywright().chromium().launch(
 					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(headless)));
-			case "webkit" ->
-					browser.set(playwright.get().webkit().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
-			case "firefox" ->
-					browser.set(playwright.get().firefox().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
-			default -> throw new IllegalArgumentException("Invalid browser: " + browser);
+			case "webkit" -> playwrightContext.get().setBrowser(
+					getPlaywright().webkit().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
+			case "firefox" -> playwrightContext.get().setBrowser(
+					getPlaywright().firefox().launch(new BrowserType.LaunchOptions().setHeadless(headless)));
+			default -> throw new IllegalArgumentException("Invalid browser: " + binary);
 		}
 	}
 
 	public void setBrowserContext() {
-		browserContext.set(browser.get().newContext());
+		playwrightContext.get().setBrowserContext(getBrowser().newContext());
 	}
 
 	public void setPage() {
-		page.set(browserContext.get().newPage());
+		playwrightContext.get().setPage(getBrowserContext().newPage());
 	}
 
 	public static Playwright getPlaywright() {
-		return playwright.get();
+		return playwrightContext.get().getPlaywright();
 	}
 
 	public static Browser getBrowser() {
-		return browser.get();
+		return playwrightContext.get().getBrowser();
 	}
 
 	public static BrowserContext getBrowserContext() {
-		return browserContext.get();
+		return playwrightContext.get().getBrowserContext();
 	}
 
 	public static Page getPage() {
-		return page.get();
+		return playwrightContext.get().getPage();
 	}
 
 	public static String takeScreenshot() {
@@ -64,4 +68,7 @@ public class PlaywrightFactory {
 		return Base64.getEncoder().encodeToString(buffer);
 	}
 
+	public void removePlaywrightContext() {
+		playwrightContext.remove();
+	}
 }
