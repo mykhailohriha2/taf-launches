@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 import com.microsoft.playwright.*;
-import com.reportportal.launches.config.PropertiesController;
+import com.reportportal.launches.config.PropertiesProvider;
 
 
 public class PlaywrightFactory {
@@ -19,9 +19,9 @@ public class PlaywrightFactory {
 	}
 
 	public void setBrowser() {
-		String binary = PropertiesController.getBrowserPropertyByKey("binary");
-		String channel = PropertiesController.getBrowserPropertyByKey("channel");
-		String headless = PropertiesController.getBrowserPropertyByKey("headless");
+		String binary = PropertiesProvider.getBrowserPropertyByKey("binary");
+		String channel = PropertiesProvider.getBrowserPropertyByKey("channel");
+		String headless = PropertiesProvider.getBrowserPropertyByKey("headless");
 		switch (binary) {
 			case "chromium" -> browser.set(playwright.get().chromium().launch(
 					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(Boolean.parseBoolean(headless))));

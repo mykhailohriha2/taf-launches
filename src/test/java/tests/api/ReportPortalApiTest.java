@@ -1,5 +1,6 @@
 package tests.api;
 
+import static com.reportportal.launches.utils.WebApiUtils.getBodyElementValueFromResponse;
 import static org.apache.http.HttpStatus.SC_OK;
 
 import org.assertj.core.api.SoftAssertions;
@@ -10,7 +11,7 @@ import io.restassured.response.Response;
 import tests.base.BaseApiTest;
 
 
-public class ReportPortalServicesApiTest extends BaseApiTest {
+public class ReportPortalApiTest extends BaseApiTest {
 	private String expectedApiServiceName;
 	private String expectedApiServiceVersion;
 	private String expectedUatServiceName;
@@ -32,7 +33,7 @@ public class ReportPortalServicesApiTest extends BaseApiTest {
 
 	@Test
 	public void verifyThatReportPortalServicesAreRunning() {
-		Response reportPortalInfoResponse = reportPortalService.sendGetReportPortalInfo(SC_OK);
+		Response reportPortalInfoResponse = sendGetReportPortalInfo(SC_OK);
 		assertThatServiceIsUpAndRunning(reportPortalInfoResponse, "api.build.name", "api.build.version",
 				expectedApiServiceName, expectedApiServiceVersion);
 		assertThatServiceIsUpAndRunning(reportPortalInfoResponse, "uat.build.name", "uat.build.version",
@@ -44,10 +45,8 @@ public class ReportPortalServicesApiTest extends BaseApiTest {
 
 	private void assertThatServiceIsUpAndRunning(Response reportPortalInfoResponse, String pathToServiceName,
 			String pathToServiceVersion, String expectedServiceName, String expectedServiceVersion) {
-		String serviceName = reportPortalService.getBodyElementValueFromResponse(reportPortalInfoResponse,
-				pathToServiceName);
-		String serviceVersion = reportPortalService.getBodyElementValueFromResponse(reportPortalInfoResponse,
-				pathToServiceVersion);
+		String serviceName = getBodyElementValueFromResponse(reportPortalInfoResponse, pathToServiceName);
+		String serviceVersion = getBodyElementValueFromResponse(reportPortalInfoResponse, pathToServiceVersion);
 		softAssertions.assertThat(serviceName).as("Service name is as expected").isEqualTo(expectedServiceName);
 		softAssertions.assertThat(serviceVersion).as("Service version is as expected").isEqualTo(expectedServiceVersion);
 	}

@@ -2,7 +2,7 @@ package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.reportportal.launches.model.User;
+import com.reportportal.launches.models.User;
 import com.reportportal.launches.pages.base.BasePage;
 
 

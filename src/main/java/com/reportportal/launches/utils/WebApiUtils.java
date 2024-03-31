@@ -1,9 +1,11 @@
-package com.reportportal.launches.services.base;
+package com.reportportal.launches.utils;
 
 import io.restassured.response.Response;
+import lombok.experimental.UtilityClass;
 
 
-public class BaseApiService extends BaseRequest {
+@UtilityClass
+public class WebApiUtils {
 	public String getBodyElementValueFromResponse(Response resp, String pathToElement) {
 		return resp.getBody().jsonPath().getString(pathToElement);
 	}

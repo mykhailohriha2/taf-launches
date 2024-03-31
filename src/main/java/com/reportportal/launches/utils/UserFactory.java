@@ -1,12 +1,12 @@
 package com.reportportal.launches.utils;
 
-import static com.reportportal.launches.config.PropertiesController.getEnvPropertyByKey;
+import static com.reportportal.launches.config.PropertiesProvider.getEnvPropertyByKey;
 
-import com.reportportal.launches.model.User;
+import com.reportportal.launches.models.User;
 
 
-public class UserUtils {
-	private UserUtils() {
+public class UserFactory {
+	private UserFactory() {
 	}
 
 	public static final String DEFAULT_USER_NAME = "default.user.name";

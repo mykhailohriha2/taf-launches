@@ -3,8 +3,8 @@ package com.reportportal.launches.config;
 import java.util.ResourceBundle;
 
 
-public class PropertiesController {
-	private PropertiesController() {
+public class PropertiesProvider {
+	private PropertiesProvider() {
 	}
 
 	private static final ResourceBundle envBundle = ResourceBundle.getBundle(System.getProperty("env"));

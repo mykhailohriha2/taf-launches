@@ -1,4 +1,4 @@
-package com.reportportal.launches.model;
+package com.reportportal.launches.models;
 
 import lombok.Builder;
 import lombok.Data;
