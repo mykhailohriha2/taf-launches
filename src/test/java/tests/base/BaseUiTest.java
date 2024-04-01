@@ -1,10 +1,9 @@
 package tests.base;
 
-import static com.reportportal.launches.config.EnvironmentConfigProvider.getEnvConfig;
-
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.*;
 
+import com.reportportal.launches.config.ConfigHolder;
 import com.reportportal.launches.listeners.ExtentReportListener;
 import com.reportportal.launches.playwright.PlaywrightFacade;
 
@@ -23,7 +22,7 @@ public abstract class BaseUiTest {
 		playwrightFacade.setBrowserContext();
 		playwrightFacade.setPage();
 		softAssert = new SoftAssertions();
-		playwrightFacade.getPage().navigate(getEnvConfig().baseUrl());
+		playwrightFacade.getPage().navigate(ConfigHolder.getInstance().baseUrl());
 	}
 
 	@AfterMethod

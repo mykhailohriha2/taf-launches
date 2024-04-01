@@ -2,9 +2,18 @@ package com.reportportal.launches.config;
 
 import org.aeonbits.owner.Config;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources({ "system:properties", "file:./src/main/resources/environment.properties" })
-public interface EnvironmentConfig extends Config {
+
+@Config.Sources({ "file:./src/main/resources/${env}.properties" })
+public interface EnvConfig extends Config {
+	@Key("binary")
+	String binary();
+
+	@Key("channel")
+	String channel();
+
+	@Key("headless")
+	boolean headless();
+
 	@Key("default.user.name")
 	String defaultUserName();
 
@@ -17,5 +26,6 @@ public interface EnvironmentConfig extends Config {
 	@Key("admin.user.password")
 	String adminUserPassword();
 
+	@Key("baseUrl")
 	String baseUrl();
 }

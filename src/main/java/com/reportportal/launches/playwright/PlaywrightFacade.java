@@ -1,11 +1,10 @@
 package com.reportportal.launches.playwright;
 
-import static com.reportportal.launches.config.BrowserConfigProvider.getBrowserConfig;
-
 import java.nio.file.Paths;
 import java.util.Base64;
 
 import com.microsoft.playwright.*;
+import com.reportportal.launches.config.ConfigHolder;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -29,9 +28,9 @@ public class PlaywrightFacade {
 	}
 
 	public void setBrowser() {
-		String binary = getBrowserConfig().binary();
-		String channel = getBrowserConfig().channel();
-		boolean headless = getBrowserConfig().headless();
+		String binary = ConfigHolder.getInstance().binary();
+		String channel = ConfigHolder.getInstance().channel();
+		boolean headless = ConfigHolder.getInstance().headless();
 		switch (binary) {
 			case "chromium" -> playwrightSession.get().setBrowser(getPlaywright().chromium().launch(
 					new BrowserType.LaunchOptions().setChannel(channel).setHeadless(headless)));

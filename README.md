@@ -1,19 +1,17 @@
-﻿# Run tests using a specific browser:
+﻿# By default 'env' value = "chromeLocal" (can be changed in 'pom.xml' file)
+# Run tests using a specific browser and env:
+    Run tests with Chrome on local:
+        mvn clean test -Denv="chromeLocal"
+    Run tests with Chrome on remote:
+        mvn clean test -Denv="chromeRemote"
 
-    Run tests with Chrome:
-        mvn clean test -Dbinary="chromium" -Dchannel="chrome" -Dheadless="false"
-    Run tests with Firefox:
-        mvn clean test -Dbinary="firefox" -Dheadless="false"
-    Run tests with Safari:
-        mvn clean test -Dbinary="webkit" -Dheadless="false"
+    Run tests with Firefox on local:
+        mvn clean test -Denv="firefoxLocal"
+    Run tests with Firefox on remote:
+        mvn clean test -Denv="firefoxRemote"
 
-# Run tests using a specific environment:
+    Run tests with Safari on local:
+        mvn clean test -Denv="safariLocal"
+    Run tests with Safari on remote:
+        mvn clean test -Denv="safariRemote"
 
-    Run tests on local:
-        mvn clean test -DbaseUrl="http://localhost:8080"
-    Run tests on remote:
-        mvn clean test -DbaseUrl="https://rp.epam.com/"
-
-# Run tests with Chrome on remote:
-
-    mvn clean test -Dbinary="chromium" -Dchannel="chrome" -Dheadless="false" -DbaseUrl="https://rp.epam.com/"

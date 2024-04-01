@@ -23,8 +23,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <env>local</env>
-                        <browser>chrome</browser>
+                        <env>chromeLocal</env>
                     </systemPropertyVariables>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
