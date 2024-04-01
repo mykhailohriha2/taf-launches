@@ -1,8 +1,13 @@
 package tests.base;
 
 
-import com.reportportal.launches.webapi.ReportPortalClient;
+import org.assertj.core.api.SoftAssertions;
+import org.testng.annotations.Listeners;
+
+import com.reportportal.launches.listeners.ExtentReportListener;
 
 
-public abstract class BaseApiTest extends ReportPortalClient {
+@Listeners(ExtentReportListener.class)
+public abstract class BaseApiTest {
+	protected SoftAssertions softAssert;
 }

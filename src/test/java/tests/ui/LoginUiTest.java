@@ -1,6 +1,6 @@
 package tests.ui;
 
-import static com.reportportal.launches.datastructures.Messages.SIGNED_IN_SUCCESSFULLY;
+import static com.reportportal.launches.datatypes.constants.Messages.SIGNED_IN_SUCCESSFULLY;
 import static com.reportportal.launches.factories.UserFactory.getAdminUser;
 import static com.reportportal.launches.factories.UserFactory.getDefaultUser;
 

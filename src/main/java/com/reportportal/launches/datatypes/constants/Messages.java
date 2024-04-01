@@ -1,4 +1,4 @@
-package com.reportportal.launches.datastructures;
+package com.reportportal.launches.datatypes.constants;
 
 import lombok.experimental.UtilityClass;
 

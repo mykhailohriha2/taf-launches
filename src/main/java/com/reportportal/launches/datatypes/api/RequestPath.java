@@ -1,4 +1,4 @@
-package com.reportportal.launches.datastructures.webapi;
+package com.reportportal.launches.datatypes.api;
 
 import static com.reportportal.launches.config.EnvironmentConfigProvider.getEnvConfig;
 

@@ -7,7 +7,11 @@ import java.util.Base64;
 
 import com.microsoft.playwright.*;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PlaywrightFacade {
 	private static final ThreadLocal<PlaywrightSession> playwrightSession = ThreadLocal.withInitial(
 			PlaywrightSession::new);
@@ -65,7 +69,8 @@ public class PlaywrightFacade {
 
 	public static String takeScreenshot() {
 		String path = System.getProperty("user.dir") + "/screenshot/" + System.currentTimeMillis() + ".png";
-		byte[] buffer = getInstance().getPage().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(true));
+		byte[] buffer = getInstance().getPage().screenshot(
+				new Page.ScreenshotOptions().setPath(Paths.get(path)).setFullPage(true));
 		return Base64.getEncoder().encodeToString(buffer);
 	}
 

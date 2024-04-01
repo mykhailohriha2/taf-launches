@@ -1,4 +1,4 @@
-package com.reportportal.launches.webapi.base;
+package com.reportportal.launches.api.base;
 
 import static io.restassured.RestAssured.given;
 
