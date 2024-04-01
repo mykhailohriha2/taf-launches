@@ -31,7 +31,7 @@ public class LoginUiTest2 extends BaseUiTest {
 
 	@Test
 	public void validateUserIsAbleToLogin2() {
-		loginPage.login(UserFactory.getAdminUser());
+		loginPage.login(UserFactory.getDefaultUser());
 		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
