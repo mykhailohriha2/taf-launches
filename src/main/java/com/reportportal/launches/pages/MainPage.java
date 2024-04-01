@@ -1,14 +1,12 @@
 package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
 import com.reportportal.launches.pages.base.BasePage;
 
 
 public class MainPage extends BasePage {
-
-	public MainPage(Page page) {
-		super(page);
+	public MainPage() {
+		super();
 	}
 
 	private final String notification = "#notification-root div p";

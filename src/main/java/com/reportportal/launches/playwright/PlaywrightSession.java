@@ -2,13 +2,11 @@ package com.reportportal.launches.playwright;
 
 import com.microsoft.playwright.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 
-@Setter
-@Getter
-public class PlaywrightContext {
+@Data
+public class PlaywrightSession {
 	private Playwright playwright;
 	private Browser browser;
 	private BrowserContext browserContext;

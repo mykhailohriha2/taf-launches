@@ -8,6 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.models.User;
+import com.reportportal.launches.pages.LoginPage;
+import com.reportportal.launches.pages.MainPage;
 
 import tests.base.BaseUiTest;
 
@@ -21,6 +23,8 @@ public class LoginUiTest extends BaseUiTest {
 
 	@Test(dataProvider = "user type")
 	public void validateUserIsAbleToLogin(User user) {
+		LoginPage loginPage = new LoginPage();
+		MainPage mainPage = new MainPage();
 		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		softAssert.assertAll();

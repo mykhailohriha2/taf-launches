@@ -1,6 +1,6 @@
 package com.reportportal.launches.listeners;
 
-import static com.reportportal.launches.playwright.PlaywrightFactory.takeScreenshot;
+import static com.reportportal.launches.playwright.PlaywrightFacade.takeScreenshot;
 
 import java.io.IOException;
 import java.nio.file.*;

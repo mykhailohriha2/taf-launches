@@ -1,15 +1,14 @@
 package com.reportportal.launches.pages;
 
 import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
 import com.reportportal.launches.models.User;
 import com.reportportal.launches.pages.base.BasePage;
 
 
 public class LoginPage extends BasePage {
 
-	public LoginPage(Page page) {
-		super(page);
+	public LoginPage(){
+		super();
 	}
 
 	private final String loginField = "[name='login']";

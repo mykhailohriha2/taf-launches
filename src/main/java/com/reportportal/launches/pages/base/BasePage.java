@@ -2,13 +2,14 @@ package com.reportportal.launches.pages.base;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.reportportal.launches.playwright.PlaywrightFacade;
 
 
 public class BasePage {
 	protected Page page;
 
-	public BasePage(Page page) {
-		this.page = page;
+	public BasePage() {
+		this.page = PlaywrightFacade.getInstance().getPage();
 	}
 
 	public Locator getById(String selector) {
