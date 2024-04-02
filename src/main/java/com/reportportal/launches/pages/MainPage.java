@@ -5,10 +5,6 @@ import com.reportportal.launches.pages.base.BasePage;
 
 
 public class MainPage extends BasePage {
-	public MainPage() {
-		super();
-	}
-
 	private final String notification = "#notification-root div p";
 
 	public Locator getNotificationTooltip() {
@@ -18,5 +14,4 @@ public class MainPage extends BasePage {
 	public String getNotificationText() {
 		return getNotificationTooltip().textContent();
 	}
-
 }

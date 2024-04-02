@@ -6,11 +6,6 @@ import com.reportportal.launches.pages.base.BasePage;
 
 
 public class LoginPage extends BasePage {
-
-	public LoginPage(){
-		super();
-	}
-
 	private final String loginField = "[name='login']";
 	private final String passwordField = "[name='password']";
 	private final String loginBtn = "[type='submit']";
