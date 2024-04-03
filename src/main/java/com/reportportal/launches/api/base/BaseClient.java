@@ -1,4 +1,4 @@
-package com.reportportal.launches.services.base;
+package com.reportportal.launches.api.base;
 
 import static io.restassured.RestAssured.given;
 
@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 
-public class BaseRequest {
+public class BaseClient {
 	protected Response sendPostRequest(RequestSpecification requestSpecification, int expectedStatusCode) {
 		return given().spec(requestSpecification).when().post().then().statusCode(
 				expectedStatusCode).extract().response();

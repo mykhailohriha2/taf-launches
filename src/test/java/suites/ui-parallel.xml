@@ -1,7 +1,7 @@
-<suite name="UI main parallel suite" parallel = "classes" thread-count="2">
+<suite name="UI main parallel suite" parallel="classes" thread-count="2">
     <test name="Login Test">
         <packages>
-            <package name = "tests.ui"/>
+            <package name="tests.ui"/>
         </packages>
     </test>
 </suite>
