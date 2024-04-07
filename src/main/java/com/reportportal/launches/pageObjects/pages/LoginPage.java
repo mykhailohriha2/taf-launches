@@ -1,8 +1,8 @@
-package com.reportportal.launches.pages;
+package com.reportportal.launches.pageObjects.pages;
 
 import com.microsoft.playwright.Locator;
 import com.reportportal.launches.models.User;
-import com.reportportal.launches.pages.base.BasePage;
+import com.reportportal.launches.pageObjects.pages.base.BasePage;
 
 
 public class LoginPage extends BasePage {

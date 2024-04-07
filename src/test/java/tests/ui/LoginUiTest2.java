@@ -4,8 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.factories.UserFactory;
-import com.reportportal.launches.pages.LoginPage;
-import com.reportportal.launches.pages.MainPage;
+import com.reportportal.launches.pageObjects.pages.LoginPage;
+import com.reportportal.launches.pageObjects.pages.MainPage;
 
 import tests.base.BaseUiTest;
 
@@ -25,28 +25,28 @@ public class LoginUiTest2 extends BaseUiTest {
 	@Test
 	public void validateUserIsAbleToLogin() {
 		loginPage.login(UserFactory.getAdminUser());
-		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 
 	@Test
 	public void validateUserIsAbleToLogin2() {
 		loginPage.login(UserFactory.getDefaultUser());
-		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 
 	@Test
 	public void validateUserIsAbleToLogin3() {
 		loginPage.login(UserFactory.getAdminUser());
-		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 
 	@Test
 	public void validateUserIsAbleToLogin4() {
 		loginPage.login(UserFactory.getDefaultUser());
-		softAssert.assertThat(mainPage.getNotificationText()).isEqualTo("Signed in successfully");
+		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 }

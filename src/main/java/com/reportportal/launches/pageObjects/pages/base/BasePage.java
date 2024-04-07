@@ -1,7 +1,8 @@
-package com.reportportal.launches.pages.base;
+package com.reportportal.launches.pageObjects.pages.base;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import java.util.List;
+
+import com.microsoft.playwright.*;
 import com.reportportal.launches.playwright.PlaywrightFacade;
 
 
@@ -18,6 +19,10 @@ public class BasePage {
 
 	public Locator getByLocator(String selector) {
 		return page.locator(selector);
+	}
+
+	public List<ElementHandle> getAllByLocator(String selector) {
+		return page.querySelectorAll(selector);
 	}
 
 	public Locator getByText(String selector) {
@@ -71,5 +76,9 @@ public class BasePage {
 
 	public void getInnerText(Locator locator) {
 		locator.innerText();
+	}
+
+	public void navigateToLaunches() {
+		getByLocator("div[class*='sidebar'] a[href*='launches']").click();
 	}
 }
