@@ -3,8 +3,6 @@ package tests.api;
 import static com.reportportal.launches.utils.WebApiUtils.getBodyElementValueFromResponse;
 import static org.apache.http.HttpStatus.SC_OK;
 
-import org.assertj.core.api.SoftAssertions;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.api.ReportPortalClient;
@@ -14,11 +12,6 @@ import tests.base.BaseApiTest;
 
 
 public class ReportPortalApiTest extends BaseApiTest {
-
-	@BeforeMethod
-	public void beforeMethod() {
-		softAssert = new SoftAssertions();
-	}
 
 	@Test
 	public void verifyThatReportPortalServicesAreRunning() {

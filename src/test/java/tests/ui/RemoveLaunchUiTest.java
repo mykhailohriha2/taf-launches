@@ -1,10 +1,12 @@
 package tests.ui;
 
 import static com.reportportal.launches.datatypes.constants.Messages.*;
+import static org.apache.http.HttpStatus.SC_OK;
 
 import org.testng.annotations.Test;
 
-import com.reportportal.launches.factories.UserFactory;
+import com.reportportal.launches.api.ReportPortalClient;
+import com.reportportal.launches.models.User;
 import com.reportportal.launches.pageObjects.pages.*;
 
 import tests.base.BaseUiTest;
@@ -17,8 +19,13 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 		LoginPage loginPage = new LoginPage();
 		MainPage mainPage = new MainPage();
 		LaunchesPage launchesPage = new LaunchesPage();
-
-		loginPage.login(UserFactory.getAdminUser());
+		ReportPortalClient reportPortalClient = ReportPortalClient.getInstance();
+		User user = User.builder().name("testuser3").password("testpassword3").build();
+		String testProject = "testuser3_personal";
+		reportPortalClient.createSession(user);
+		reportPortalClient.sendPostGenerateDemoData(testProject, SC_OK);
+		
+		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		mainPage.navigateToLaunches();
 		launchesPage.clickDeleteLaunchByIndex(0);
