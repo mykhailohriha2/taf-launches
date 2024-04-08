@@ -25,8 +25,8 @@ public class LaunchesListUiTest extends BaseUiTest {
 
 		loginPage.login(testUser);
 		mainPage.navigateToLaunches();
-		List<String> launchesStartTime = launchesPage.getAllLaunches().stream().map(Launch::getStartTime).collect(
-				Collectors.toList());
+		List<String> launchesStartTime = launchesPage.getLaunchTable().getAllLaunches().stream().map(
+				Launch::getStartTime).collect(Collectors.toList());
 		softAssert.assertThat(launchesStartTime.stream().sorted(reverseOrder()).collect(Collectors.toList())).as(
 				"Launches are sorted not as expected").isEqualTo(launchesStartTime);
 		softAssert.assertAll();
