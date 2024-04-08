@@ -36,11 +36,11 @@ public class ReportPortalClient extends BaseClient {
 		return sendGetRequest(spec, expectedStatusCode);
 	}
 
-	public Response sendPostGenerateDemoData(String testProject, int expectedStatusCode) {
+	public Response sendPostGenerateDemoDataForProject(String project, int expectedStatusCode) {
 		RequestSpecification spec = new RequestSpecBuilder()
 				.setBaseUri(BASE_URL.getPath())
-				.setBasePath(GENERATE.getPath())
-				.addPathParam("projectName", testProject)
+				.setBasePath(GENERATE_DEMO_DATA.getPath())
+				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
 				.setContentType(JSON)
 				.setBody("{}")
@@ -48,25 +48,25 @@ public class ReportPortalClient extends BaseClient {
 		return sendPostRequest(spec, expectedStatusCode);
 	}
 
-	public Response sendGetLaunchesByProject(String testProject, int expectedStatusCode) {
+	public Response sendGetLaunchesByProject(String project, int expectedStatusCode) {
 		RequestSpecification spec = new RequestSpecBuilder()
 				.setBaseUri(BASE_URL.getPath())
 				.setBasePath(LAUNCH_BY_PROJECT_NAME.getPath())
-				.addPathParam("projectName", testProject)
+				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
 				.setContentType(JSON)
 				.build();
 		return sendGetRequest(spec, expectedStatusCode);
 	}
 
-	public Response sendDeleteLaunchByProject(String testProject, List<Integer> launchId,  int expectedStatusCode) {
+	public Response sendDeleteLaunchesByProject(String project, List<Integer> launchIds,  int expectedStatusCode) {
 		RequestSpecification spec = new RequestSpecBuilder()
 				.setBaseUri(BASE_URL.getPath())
 				.setBasePath(LAUNCH_BY_PROJECT_NAME.getPath())
-				.addPathParam("projectName", testProject)
+				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
 				.setContentType(JSON)
-				.setBody("{ \"ids\": " + launchId +" }")
+				.setBody("{ \"ids\": " + launchIds +" }")
 				.build();
 		return sendDeleteRequest(spec, expectedStatusCode);
 	}

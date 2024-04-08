@@ -23,8 +23,8 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 		User user = User.builder().name("testuser3").password("testpassword3").build();
 		String testProject = "testuser3_personal";
 		reportPortalClient.createSession(user);
-		reportPortalClient.sendPostGenerateDemoData(testProject, SC_OK);
-		
+		reportPortalClient.sendPostGenerateDemoDataForProject(testProject, SC_OK);
+
 		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		mainPage.navigateToLaunches();

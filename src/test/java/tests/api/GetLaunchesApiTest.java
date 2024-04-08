@@ -32,11 +32,11 @@ public class GetLaunchesApiTest extends BaseApiTest {
 		Response response = reportPortalClient.sendGetLaunchesByProject(testProject, SC_OK);
 		List<Integer> idS = response.jsonPath().getList("content.id");
 		if (idS.size() != 0) {
-			reportPortalClient.sendDeleteLaunchByProject(testProject, idS, SC_OK);
+			reportPortalClient.sendDeleteLaunchesByProject(testProject, idS, SC_OK);
 		}
 
 		validateLaunchesAmount(testProject, "0");
-		reportPortalClient.sendPostGenerateDemoData(testProject, SC_OK);
+		reportPortalClient.sendPostGenerateDemoDataForProject(testProject, SC_OK);
 		validateLaunchesAmount(testProject, "5");
 		softAssert.assertAll();
 	}
