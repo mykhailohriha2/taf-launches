@@ -1,11 +1,11 @@
-package com.reportportal.launches.pageObjects.pages;
+package com.reportportal.launches.pageobjects.pages;
 
 import com.microsoft.playwright.Locator;
-import com.reportportal.launches.pageObjects.pages.base.BasePage;
+import com.reportportal.launches.pageobjects.pages.base.BasePage;
 
 
 public class MainPage extends BasePage {
-	private final String notification = "#notification-root div p";
+	private static final String notification = "#notification-root div p";
 
 	public Locator getNotificationTooltip() {
 		return getByLocator(notification);

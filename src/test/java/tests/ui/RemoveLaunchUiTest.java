@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.reportportal.launches.api.ReportPortalClient;
 import com.reportportal.launches.models.User;
-import com.reportportal.launches.pageObjects.pages.*;
+import com.reportportal.launches.pageobjects.pages.*;
 
 import tests.base.BaseUiTest;
 
@@ -20,10 +20,10 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 		MainPage mainPage = new MainPage();
 		LaunchesPage launchesPage = new LaunchesPage();
 		ReportPortalClient reportPortalClient = ReportPortalClient.getInstance();
-		User user = User.builder().name("testuser3").password("testpassword3").build();
-		String testProject = "testuser3_personal";
+		User user = User.builder().name("testuser3").password("testpassword3").defaultProject(
+				"testuser3_personal").build();
 		reportPortalClient.createSession(user);
-		reportPortalClient.sendPostGenerateDemoDataForProject(testProject, SC_OK);
+		reportPortalClient.sendPostGenerateDemoDataForProject(user.getDefaultProject(), SC_OK);
 
 		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);

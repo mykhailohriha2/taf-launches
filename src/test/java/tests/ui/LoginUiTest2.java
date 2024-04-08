@@ -7,8 +7,8 @@ import java.util.List;
 import org.testng.annotations.*;
 
 import com.reportportal.launches.models.User;
-import com.reportportal.launches.pageObjects.pages.LoginPage;
-import com.reportportal.launches.pageObjects.pages.MainPage;
+import com.reportportal.launches.pageobjects.pages.LoginPage;
+import com.reportportal.launches.pageobjects.pages.MainPage;
 
 import tests.base.BaseUiTest;
 

@@ -1,15 +1,17 @@
-package com.reportportal.launches.pageObjects.pages.base;
+package com.reportportal.launches.pageobjects;
 
 import java.util.List;
 
 import com.microsoft.playwright.*;
 import com.reportportal.launches.playwright.PlaywrightFacade;
+import com.reportportal.launches.utils.WaitHelper;
 
 
-public class BasePage {
+public abstract class BasePageObject {
+	public static final WaitHelper waitHelper = new WaitHelper();
 	protected Page page;
 
-	public BasePage() {
+	protected BasePageObject() {
 		this.page = PlaywrightFacade.getInstance().getPage();
 	}
 
@@ -76,9 +78,5 @@ public class BasePage {
 
 	public void getInnerText(Locator locator) {
 		locator.innerText();
-	}
-
-	public void navigateToLaunches() {
-		getByLocator("div[class*='sidebar'] a[href*='launches']").click();
 	}
 }

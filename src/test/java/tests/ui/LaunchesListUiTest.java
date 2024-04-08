@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import com.reportportal.launches.models.Launch;
 import com.reportportal.launches.models.User;
-import com.reportportal.launches.pageObjects.pages.*;
+import com.reportportal.launches.pageobjects.pages.*;
 
 import tests.base.BaseUiTest;
 

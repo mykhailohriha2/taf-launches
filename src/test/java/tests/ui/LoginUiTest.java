@@ -8,8 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.models.User;
-import com.reportportal.launches.pageObjects.pages.LoginPage;
-import com.reportportal.launches.pageObjects.pages.MainPage;
+import com.reportportal.launches.pageobjects.pages.LoginPage;
+import com.reportportal.launches.pageobjects.pages.MainPage;
 
 import tests.base.BaseUiTest;
 
