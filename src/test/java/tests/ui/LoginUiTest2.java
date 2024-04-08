@@ -1,7 +1,5 @@
 package tests.ui;
 
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.annotations.*;
@@ -9,6 +7,7 @@ import org.testng.annotations.*;
 import com.reportportal.launches.models.User;
 import com.reportportal.launches.pageobjects.pages.LoginPage;
 import com.reportportal.launches.pageobjects.pages.MainPage;
+import com.reportportal.launches.utils.FileUtils;
 
 import tests.base.BaseUiTest;
 
@@ -21,16 +20,8 @@ public class LoginUiTest2 extends BaseUiTest {
 
 	@DataProvider(name = "users")
 	public Object[][] createData() {
-		List<Object[]> list = new ArrayList<Object[]>();
 		String csvFile = "./src/test/resources/testData.csv";
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				list.add(line.split(","));
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		List<Object[]> list = FileUtils.readFromCsvFile(csvFile);
 		return list.toArray(new Object[list.size()][]);
 	}
 
