@@ -1,9 +1,12 @@
 package tests.ui;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.reportportal.launches.factories.UserFactory;
+import org.testng.annotations.*;
+
+import com.reportportal.launches.models.User;
 import com.reportportal.launches.pageObjects.pages.LoginPage;
 import com.reportportal.launches.pageObjects.pages.MainPage;
 
@@ -16,37 +19,33 @@ public class LoginUiTest2 extends BaseUiTest {
 	private LoginPage loginPage;
 	private MainPage mainPage;
 
+	@DataProvider(name = "users")
+	public Object[][] createData() {
+		List<Object[]> list = new ArrayList<Object[]>();
+		String csvFile = "./src/test/resources/testData.csv";
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				list.add(line.split(","));
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return list.toArray(new Object[list.size()][]);
+	}
+
 	@BeforeMethod
 	public void beforeMethod() {
 		loginPage = new LoginPage();
 		mainPage = new MainPage();
 	}
 
-	@Test
-	public void validateUserIsAbleToLogin() {
-		loginPage.login(UserFactory.getAdminUser());
+	@Test(dataProvider = "users")
+	public void validateUserIsAbleToLogin(String userName, String userPassword) {
+		User user = User.builder().name(userName).password(userPassword).build();
+		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
 		softAssert.assertAll();
 	}
 
-	@Test
-	public void validateUserIsAbleToLogin2() {
-		loginPage.login(UserFactory.getDefaultUser());
-		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
-		softAssert.assertAll();
-	}
-
-	@Test
-	public void validateUserIsAbleToLogin3() {
-		loginPage.login(UserFactory.getAdminUser());
-		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
-		softAssert.assertAll();
-	}
-
-	@Test
-	public void validateUserIsAbleToLogin4() {
-		loginPage.login(UserFactory.getDefaultUser());
-		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
-		softAssert.assertAll();
-	}
 }
