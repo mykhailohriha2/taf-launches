@@ -29,8 +29,7 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		mainPage.navigateToLaunches();
 		launchesPage.clickDeleteLaunchByIndex(0);
-		softAssert.assertThat(launchesPage.getMessageBeforeConfirmation()).as(
-				"The message before confirmation is not as expected").isEqualTo(DELETE_LAUNCH_CONFIRMATION);
+		softAssert.assertThat(launchesPage.getMessageBeforeConfirmation()).isEqualTo(DELETE_LAUNCH_CONFIRMATION);
 		launchesPage.clickConfirmDelete();
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(LAUNCH_WAS_DELETED);
 		softAssert.assertAll();

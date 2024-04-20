@@ -19,10 +19,9 @@ public class ExtentReportListener implements ITestListener {
 
 	private static final String OUTPUT_FOLDER = "./build/";
 	private static final String FILE_NAME = "TestExecutionReport.html";
-	private static final Logger log = LogManager.getLogger(ExtentReportListener.class);
-
+	protected static final Logger log = LogManager.getLogger(ExtentReportListener.class);
 	private static final ExtentReports extent = init();
-	private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+	protected static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	private static ExtentReports extentReports;
 
 
@@ -70,12 +69,14 @@ public class ExtentReportListener implements ITestListener {
 		test.get().getModel().setStartTime(getTime(result.getStartMillis()));
 	}
 
+	@Override
 	public synchronized void onTestSuccess(ITestResult result) {
 		log.info(result.getMethod().getMethodName() + " passed!");
 		test.get().pass("Test passed");
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
+	@Override
 	public synchronized void onTestFailure(ITestResult result) {
 		log.info(result.getMethod().getMethodName() + " failed!");
 		test.get().fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot(),
@@ -83,16 +84,18 @@ public class ExtentReportListener implements ITestListener {
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
+	@Override
 	public synchronized void onTestSkipped(ITestResult result) {
 		log.info(result.getMethod().getMethodName() + " skipped!");
 		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
 	}
 
+	@Override
 	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		log.info("onTestFailedButWithinSuccessPercentage for " + result.getMethod().getMethodName());
 	}
 
-	private Date getTime(long millis) {
+	protected Date getTime(long millis) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(millis);
 		return calendar.getTime();

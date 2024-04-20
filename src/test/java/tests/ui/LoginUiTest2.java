@@ -1,5 +1,9 @@
 package tests.ui;
 
+
+import static com.reportportal.launches.datatypes.constants.Messages.SIGNED_IN_SUCCESSFULLY;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.testng.annotations.*;
@@ -18,7 +22,7 @@ public class LoginUiTest2 extends BaseUiTest {
 	private LoginPage loginPage;
 	private MainPage mainPage;
 
-	@DataProvider(name = "users")
+	@DataProvider(name = "users", parallel = true)
 	public Object[][] createData() {
 		String csvFile = "./src/test/resources/testData.csv";
 		List<Object[]> list = FileUtils.readFromCsvFile(csvFile);
@@ -35,8 +39,6 @@ public class LoginUiTest2 extends BaseUiTest {
 	public void validateUserIsAbleToLogin(String userName, String userPassword) {
 		User user = User.builder().name(userName).password(userPassword).build();
 		loginPage.login(user);
-		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo("Signed in successfully");
-		softAssert.assertAll();
+		assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 	}
-
 }

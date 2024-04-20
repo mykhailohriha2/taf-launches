@@ -41,10 +41,10 @@ public class GetLaunchesApiTest extends BaseApiTest {
 		softAssert.assertAll();
 	}
 
-	private void validateLaunchesAmount(String testProject, String expected) {
+	private void validateLaunchesAmount(String testProject, String expectedAmount) {
 		String launchesBeforeGenerating = String.valueOf(
 				reportPortalClient.sendGetLaunchesByProject(testProject, SC_OK).getBody().jsonPath().getList(
 						"content").size());
-		softAssert.assertThat(launchesBeforeGenerating).as("The launches amount is not as expected").isEqualTo(expected);
+		softAssert.assertThat(launchesBeforeGenerating).as("The launches amount is not as expected").isEqualTo(expectedAmount);
 	}
 }

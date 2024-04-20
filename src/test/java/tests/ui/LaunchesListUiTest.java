@@ -1,6 +1,7 @@
 package tests.ui;
 
 import static java.util.Collections.reverseOrder;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,8 +28,7 @@ public class LaunchesListUiTest extends BaseUiTest {
 		mainPage.navigateToLaunches();
 		List<String> launchesStartTime = launchesPage.getLaunchTable().getAllLaunches().stream().map(
 				Launch::getStartTime).collect(Collectors.toList());
-		softAssert.assertThat(launchesStartTime.stream().sorted(reverseOrder()).collect(Collectors.toList())).as(
+		assertThat(launchesStartTime.stream().sorted(reverseOrder()).collect(Collectors.toList())).as(
 				"Launches are sorted not as expected").isEqualTo(launchesStartTime);
-		softAssert.assertAll();
 	}
 }

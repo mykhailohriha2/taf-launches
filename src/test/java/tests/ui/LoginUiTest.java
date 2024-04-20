@@ -3,6 +3,7 @@ package tests.ui;
 import static com.reportportal.launches.datatypes.constants.Messages.SIGNED_IN_SUCCESSFULLY;
 import static com.reportportal.launches.factories.UserFactory.getAdminUser;
 import static com.reportportal.launches.factories.UserFactory.getDefaultUser;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ import tests.base.BaseUiTest;
 
 public class LoginUiTest extends BaseUiTest {
 
-	@DataProvider(name = "user type")
+	@DataProvider(name = "user type", parallel = true)
 	public Object[] users() {
 		return new Object[] { getDefaultUser(), getAdminUser() };
 	}
@@ -26,7 +27,6 @@ public class LoginUiTest extends BaseUiTest {
 		LoginPage loginPage = new LoginPage();
 		MainPage mainPage = new MainPage();
 		loginPage.login(user);
-		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
-		softAssert.assertAll();
+		assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 	}
 }
