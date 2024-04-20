@@ -1,14 +1,17 @@
-package com.reportportal.launches.pages.base;
+package com.reportportal.launches.pageobjects;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
+import java.util.List;
+
+import com.microsoft.playwright.*;
 import com.reportportal.launches.playwright.PlaywrightFacade;
+import com.reportportal.launches.utils.WaitHelper;
 
 
-public class BasePage {
+public abstract class BasePageObject {
+	public static final WaitHelper waitHelper = new WaitHelper();
 	protected Page page;
 
-	public BasePage() {
+	protected BasePageObject() {
 		this.page = PlaywrightFacade.getInstance().getPage();
 	}
 
@@ -18,6 +21,10 @@ public class BasePage {
 
 	public Locator getByLocator(String selector) {
 		return page.locator(selector);
+	}
+
+	public List<ElementHandle> getAllByLocator(String selector) {
+		return page.querySelectorAll(selector);
 	}
 
 	public Locator getByText(String selector) {
