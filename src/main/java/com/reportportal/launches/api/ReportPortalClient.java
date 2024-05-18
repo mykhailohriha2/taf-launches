@@ -59,7 +59,7 @@ public class ReportPortalClient extends BaseClient {
 		return sendGetRequest(spec, expectedStatusCode);
 	}
 
-	public Response sendDeleteLaunchesByProject(String project, List<Integer> launchIds,  int expectedStatusCode) {
+	public Response sendDeleteLaunchesInProjectByIds(String project, List<Integer> launchIds,  int expectedStatusCode) {
 		RequestSpecification spec = new RequestSpecBuilder()
 				.setBaseUri(BASE_URL.getPath())
 				.setBasePath(LAUNCH_BY_PROJECT_NAME.getPath())
