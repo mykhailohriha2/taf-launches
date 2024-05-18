@@ -10,19 +10,14 @@ import com.reportportal.launches.playwright.PlaywrightFacade;
 
 @Listeners(ExtentReportListener.class)
 public abstract class BaseUiTest {
-
+	private final PlaywrightFacade playwrightFacade = PlaywrightFacade.getInstance();
 	protected SoftAssertions softAssert;
-	private PlaywrightFacade playwrightFacade;
 
 	@BeforeMethod
 	public void setUp() {
-		playwrightFacade = PlaywrightFacade.getInstance();
-		playwrightFacade.setPlaywright();
-		playwrightFacade.setBrowser();
-		playwrightFacade.setBrowserContext();
-		playwrightFacade.setPage();
-		softAssert = new SoftAssertions();
+		playwrightFacade.startPlaywright();
 		playwrightFacade.getPage().navigate(ConfigHolder.getInstance().baseUrl());
+		softAssert = new SoftAssertions();
 	}
 
 	@AfterMethod

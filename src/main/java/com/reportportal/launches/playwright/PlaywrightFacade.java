@@ -73,6 +73,13 @@ public class PlaywrightFacade {
 		return Base64.getEncoder().encodeToString(buffer);
 	}
 
+	public void startPlaywright() {
+		setPlaywright();
+		setBrowser();
+		setBrowserContext();
+		setPage();
+	}
+
 	public void closePlaywright() {
 		getBrowserContext().close();
 		getBrowser().close();
