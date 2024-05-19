@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.reportportal.launches.api.base.BaseClient;
 import com.reportportal.launches.models.User;
+import com.reportportal.launches.models.dto.AnalyzeLaunchRQ;
 import com.reportportal.launches.utils.WebApiUtils;
 
 import io.restassured.builder.RequestSpecBuilder;
@@ -69,6 +70,18 @@ public class ReportPortalClient extends BaseClient {
 				.setBody("{ \"ids\": " + launchIds +" }")
 				.build();
 		return sendDeleteRequest(spec, expectedStatusCode);
+	}
+
+	public Response sendPostStartLaunchAnalysisById(String project, AnalyzeLaunchRQ analyzeLaunchRQ,  int expectedStatusCode) {
+		RequestSpecification spec = new RequestSpecBuilder()
+				.setBaseUri(BASE_URL.getPath())
+				.setBasePath(START_LAUNCH_ANALYSIS.getPath())
+				.addPathParam("projectName", project)
+				.addHeader("Authorization", sessionToken.get())
+				.setContentType(JSON)
+				.setBody(analyzeLaunchRQ)
+				.build();
+		return sendPostRequest(spec, expectedStatusCode);
 	}
 
 	public Response sendPostToken(User user, int expectedStatusCode) {
