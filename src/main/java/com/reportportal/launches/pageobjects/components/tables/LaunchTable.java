@@ -19,11 +19,16 @@ public class LaunchTable extends TableComponent {
 	private static final String autoBugColumn = "div[class*='launchSuiteGrid__ab'] div[class*='total']";
 	private static final String systemIssueColumn = "div[class*='launchSuiteGrid__si'] div[class*='total']";
 	private static final String toInvestigateColumn = "div[class*='launchSuiteGrid__ti'] div[class*='total']";
+	private static final String launchCheckbox = "td[class*='checkboxCell__checkbox-cell'] div";
 
 	public List<Launch> getAllLaunches() {
 		List<Launch> launches = new ArrayList<>();
 		getAllRows().forEach(elementHandle -> launches.add(buildLaunchWithElementHandle(elementHandle)));
 		return launches;
+	}
+
+	public void selectLaunchByIndex(int index) {
+		getAllRows().get(index).querySelector(launchCheckbox).check();
 	}
 
 	private Launch buildLaunchWithElementHandle(ElementHandle elementHandle) {
