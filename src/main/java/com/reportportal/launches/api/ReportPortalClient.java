@@ -9,9 +9,11 @@ import java.util.List;
 
 import com.reportportal.launches.api.base.BaseClient;
 import com.reportportal.launches.models.User;
+import com.reportportal.launches.models.dto.AnalyzeLaunchRQ;
 import com.reportportal.launches.utils.WebApiUtils;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.AccessLevel;
@@ -37,8 +39,7 @@ public class ReportPortalClient extends BaseClient {
 	}
 
 	public Response sendPostGenerateDemoDataForProject(String project, int expectedStatusCode) {
-		RequestSpecification spec = new RequestSpecBuilder()
-				.setBaseUri(BASE_URL.getPath())
+		RequestSpecification spec = spec()
 				.setBasePath(GENERATE_DEMO_DATA.getPath())
 				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
@@ -49,8 +50,7 @@ public class ReportPortalClient extends BaseClient {
 	}
 
 	public Response sendGetLaunchesByProject(String project, int expectedStatusCode) {
-		RequestSpecification spec = new RequestSpecBuilder()
-				.setBaseUri(BASE_URL.getPath())
+		RequestSpecification spec = spec()
 				.setBasePath(LAUNCH_BY_PROJECT_NAME.getPath())
 				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
@@ -59,9 +59,8 @@ public class ReportPortalClient extends BaseClient {
 		return sendGetRequest(spec, expectedStatusCode);
 	}
 
-	public Response sendDeleteLaunchesByProject(String project, List<Integer> launchIds,  int expectedStatusCode) {
-		RequestSpecification spec = new RequestSpecBuilder()
-				.setBaseUri(BASE_URL.getPath())
+	public Response sendDeleteLaunchesInProjectByIds(String project, List<Integer> launchIds,  int expectedStatusCode) {
+		RequestSpecification spec = spec()
 				.setBasePath(LAUNCH_BY_PROJECT_NAME.getPath())
 				.addPathParam("projectName", project)
 				.addHeader("Authorization", sessionToken.get())
@@ -69,6 +68,17 @@ public class ReportPortalClient extends BaseClient {
 				.setBody("{ \"ids\": " + launchIds +" }")
 				.build();
 		return sendDeleteRequest(spec, expectedStatusCode);
+	}
+
+	public Response sendPostStartLaunchAnalysisById(String project, AnalyzeLaunchRQ analyzeLaunchRQ,  int expectedStatusCode) {
+		RequestSpecification spec = spec()
+				.setBasePath(START_LAUNCH_ANALYSIS.getPath())
+				.addPathParam("projectName", project)
+				.addHeader("Authorization", sessionToken.get())
+				.setContentType(JSON)
+				.setBody(analyzeLaunchRQ)
+				.build();
+		return sendPostRequest(spec, expectedStatusCode);
 	}
 
 	public Response sendPostToken(User user, int expectedStatusCode) {
@@ -81,6 +91,7 @@ public class ReportPortalClient extends BaseClient {
 				.addFormParam("username", user.getName())
 				.addFormParam("password", user.getPassword())
 				.setContentType(URLENC)
+				.log(LogDetail.ALL)
 				.build();
 		return sendPostRequest(spec, expectedStatusCode);
 	}
