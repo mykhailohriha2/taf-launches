@@ -7,7 +7,10 @@ import com.microsoft.playwright.ElementHandle;
 import com.reportportal.launches.models.Launch;
 import com.reportportal.launches.pageobjects.components.tables.base.TableComponent;
 
+import lombok.extern.log4j.Log4j2;
 
+
+@Log4j2
 public class LaunchTable extends TableComponent {
 	private static final String launchNameColumn = "td[class*='launchSuiteGrid__name'] div[class*='itemInfo__name']";
 	private static final String startTimeColumn = "div[class*='launchSuiteGrid__start-time'] span[class*='absRelTime__absolute']";
@@ -31,6 +34,45 @@ public class LaunchTable extends TableComponent {
 		getAllRows().get(index).querySelector(launchCheckbox).check();
 	}
 
+	public void clickTotalByIndex(int index) {
+		getAllRows().get(index).querySelector(totalColumn).click();
+	}
+
+	public void clickPassedByIndex(int index) {
+		try {
+			getAllRows().get(index).querySelector(passedColumn).click();
+		} catch (NullPointerException e) {
+			log.info("There are no passed tests");
+		}
+	}
+
+	public void clickFailedByIndex(int index) {
+		try {
+			getAllRows().get(index).querySelector(failedColumn).click();
+		} catch (NullPointerException e) {
+			log.info("There are no failed tests");
+		}
+	}
+
+	public void clickSkippedByIndex(int index) {
+		try {
+			getAllRows().get(index).querySelector(skippedColumn).click();
+		} catch (NullPointerException e) {
+			log.info("There are no skipped tests");
+		}
+	}
+
+	public void openLaunchByName(String name) {
+		for (ElementHandle e : getAllRows()){
+			if (hasMatch(e, name)){
+				e.querySelector(launchNameColumn).click();
+				break;
+			}
+		}
+	}
+
+
+
 	private Launch buildLaunchWithElementHandle(ElementHandle elementHandle) {
 		return Launch.builder().name(getTextContentFromElementHandle(elementHandle, launchNameColumn)).startTime(
 				getTextContentFromElementHandle(elementHandle, startTimeColumn)).total(
@@ -50,5 +92,9 @@ public class LaunchTable extends TableComponent {
 		} catch (NullPointerException e) {
 			return "";
 		}
+	}
+
+	private boolean hasMatch(ElementHandle e, String name) {
+		return e.querySelector(launchNameColumn).textContent().equals(name);
 	}
 }

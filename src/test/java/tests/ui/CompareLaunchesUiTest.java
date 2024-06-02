@@ -16,15 +16,15 @@ public class CompareLaunchesUiTest extends BaseUiTest {
 	public void validateUserIsAbleToSelectSeveralLaunchesAndCompareThemUi() {
 		LoginPage loginPage = new LoginPage();
 		MainPage mainPage = new MainPage();
-		LaunchesPage launchesPage = new LaunchesPage();
+		LaunchesListPage launchesListPage = new LaunchesListPage();
 		User testUser = User.builder().name("testuser4").password("testpassword4").build();
 
 		loginPage.login(testUser);
 		mainPage.navigateToLaunches();
-		launchesPage.selectLaunchByIndex(0);
-		launchesPage.selectLaunchByIndex(1);
-		launchesPage.expandActionsMenu();
-		launchesPage.clickCompareButton();
-		assertThat(launchesPage.isCompareWidgetVisible()).as("Compare widget is not visible").isTrue();
+		launchesListPage.selectLaunchByIndex(0);
+		launchesListPage.selectLaunchByIndex(1);
+		launchesListPage.expandActionsMenu();
+		launchesListPage.clickCompareButton();
+		assertThat(launchesListPage.isCompareWidgetVisible()).as("Compare widget is not visible").isTrue();
 	}
 }

@@ -18,7 +18,7 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 	public void validateUserIsAbleToRemoveLaunchUi() {
 		LoginPage loginPage = new LoginPage();
 		MainPage mainPage = new MainPage();
-		LaunchesPage launchesPage = new LaunchesPage();
+		LaunchesListPage launchesListPage = new LaunchesListPage();
 		ReportPortalClient reportPortalClient = ReportPortalClient.getInstance();
 		User user = User.builder().name("testuser3").password("testpassword3").defaultProject(
 				"testuser3_personal").build();
@@ -28,9 +28,9 @@ public class RemoveLaunchUiTest extends BaseUiTest {
 		loginPage.login(user);
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(SIGNED_IN_SUCCESSFULLY);
 		mainPage.navigateToLaunches();
-		launchesPage.clickDeleteLaunchByIndex(0);
-		softAssert.assertThat(launchesPage.getMessageBeforeConfirmation()).isEqualTo(DELETE_LAUNCH_CONFIRMATION);
-		launchesPage.clickConfirmDelete();
+		launchesListPage.clickDeleteLaunchByIndex(0);
+		softAssert.assertThat(launchesListPage.getMessageBeforeConfirmation()).isEqualTo(DELETE_LAUNCH_CONFIRMATION);
+		launchesListPage.clickConfirmDelete();
 		softAssert.assertThat(mainPage.getNotificationTextAndCloseTooltip()).isEqualTo(LAUNCH_WAS_DELETED);
 		softAssert.assertAll();
 	}

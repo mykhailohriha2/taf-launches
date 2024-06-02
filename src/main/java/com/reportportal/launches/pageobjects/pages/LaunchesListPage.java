@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-public class LaunchesPage extends BasePage {
+public class LaunchesListPage extends BasePage {
 	@Getter
 	private final LaunchTable launchTable = new LaunchTable();
 	private static final String launchMenu = "div[class*='hamburger__hamburger--']";
@@ -45,6 +45,31 @@ public class LaunchesPage extends BasePage {
 	public void clickConfirmDelete() {
 		getByLocator(confirmDeleteBtn).click();
 		log.info("Click confirm delete button");
+	}
+
+	public void clickTotalByIndex(int index) {
+		launchTable.clickTotalByIndex(index);
+		log.info("Click total column by index: " + index);
+	}
+
+	public void clickPassedByIndex(int index) {
+		launchTable.clickPassedByIndex(index);
+		log.info("Click passed column by index: " + index);
+	}
+
+	public void clickFailedByIndex(int index) {
+		launchTable.clickFailedByIndex(index);
+		log.info("Click failed column by index: " + index);
+	}
+
+	public void clickSkippedByIndex(int index) {
+		launchTable.clickSkippedByIndex(index);
+		log.info("Click skipped column by index: " + index);
+	}
+
+	public void openLaunchByName(String name) {
+		launchTable.openLaunchByName(name);
+		log.info("Open launch by name: " + name);
 	}
 
 	public boolean isCompareWidgetVisible() {
