@@ -3,6 +3,7 @@ package tests.ui;
 import static com.reportportal.launches.datatypes.constants.Messages.*;
 import static org.apache.http.HttpStatus.SC_OK;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.api.ReportPortalClient;
@@ -13,12 +14,19 @@ import tests.base.BaseUiTest;
 
 
 public class RemoveLaunchUiTest extends BaseUiTest {
+	private LoginPage loginPage;
+	private MainPage mainPage;
+	private LaunchesListPage launchesListPage;
+
+	@BeforeMethod
+	public void beforeMethod() {
+		loginPage = new LoginPage();
+		mainPage = new MainPage();
+		launchesListPage = new LaunchesListPage();
+	}
 
 	@Test(description = "User is able to remove launch")
 	public void validateUserIsAbleToRemoveLaunchUi() {
-		LoginPage loginPage = new LoginPage();
-		MainPage mainPage = new MainPage();
-		LaunchesListPage launchesListPage = new LaunchesListPage();
 		ReportPortalClient reportPortalClient = ReportPortalClient.getInstance();
 		User user = User.builder().name("testuser3").password("testpassword3").defaultProject(
 				"testuser3_personal").build();

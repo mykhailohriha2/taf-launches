@@ -1,6 +1,6 @@
 package com.reportportal.launches.pageobjects.pages;
 
-import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
 import com.reportportal.launches.pageobjects.components.tables.LaunchTable;
 import com.reportportal.launches.pageobjects.pages.base.BasePage;
 
@@ -20,9 +20,9 @@ public class LaunchesListPage extends BasePage {
 
 	public void clickDeleteLaunchByIndex(int index) {
 		launchTable.waitForTableIsLoaded();
-		ElementHandle elementHandle = getAllByLocator(launchMenu).get(index);
-		elementHandle.click();
-		elementHandle.querySelector("text='Delete'").click();
+		Locator launch = getAllByLocator(launchMenu).get(index);
+		launch.click();
+		launch.locator("text='Delete'").click();
 		log.info("Click delete launch by index " + index);
 	}
 

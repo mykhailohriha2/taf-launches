@@ -2,7 +2,7 @@ package com.reportportal.launches.pageobjects.components.tables.base;
 
 import java.util.List;
 
-import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
 import com.reportportal.launches.pageobjects.components.BaseComponent;
 
 
@@ -13,11 +13,11 @@ public abstract class TableComponent extends BaseComponent {
 	private static final String spinner = "div[class*='grid__spinner']";
 
 
-	public List<ElementHandle> getAllRows() {
+	public List<Locator> getAllRows() {
 		return getAllByLocator(row);
 	}
 
-	public List<ElementHandle> getAllHeaderColumns() {
+	public List<Locator> getAllHeaderColumns() {
 		return getAllByLocator(headerColumn);
 	}
 

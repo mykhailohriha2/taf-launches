@@ -3,7 +3,7 @@ package com.reportportal.launches.pageobjects.components.tables;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.microsoft.playwright.ElementHandle;
+import com.microsoft.playwright.Locator;
 import com.reportportal.launches.models.Launch;
 import com.reportportal.launches.pageobjects.components.tables.base.TableComponent;
 
@@ -26,46 +26,34 @@ public class LaunchTable extends TableComponent {
 
 	public List<Launch> getAllLaunches() {
 		List<Launch> launches = new ArrayList<>();
-		getAllRows().forEach(elementHandle -> launches.add(buildLaunchWithElementHandle(elementHandle)));
+		getAllRows().forEach(row -> launches.add(buildLaunch(row)));
 		return launches;
 	}
 
 	public void selectLaunchByIndex(int index) {
-		getAllRows().get(index).querySelector(launchCheckbox).check();
+		getAllRows().get(index).locator(launchCheckbox).check();
 	}
 
 	public void clickTotalByIndex(int index) {
-		getAllRows().get(index).querySelector(totalColumn).click();
+		getAllRows().get(index).locator(totalColumn).click();
 	}
 
 	public void clickPassedByIndex(int index) {
-		try {
-			getAllRows().get(index).querySelector(passedColumn).click();
-		} catch (NullPointerException e) {
-			log.info("There are no passed tests");
-		}
+			getAllRows().get(index).locator(passedColumn).click();
 	}
 
 	public void clickFailedByIndex(int index) {
-		try {
-			getAllRows().get(index).querySelector(failedColumn).click();
-		} catch (NullPointerException e) {
-			log.info("There are no failed tests");
-		}
+			getAllRows().get(index).locator(failedColumn).click();
 	}
 
 	public void clickSkippedByIndex(int index) {
-		try {
-			getAllRows().get(index).querySelector(skippedColumn).click();
-		} catch (NullPointerException e) {
-			log.info("There are no skipped tests");
-		}
+			getAllRows().get(index).locator(skippedColumn).click();
 	}
 
 	public void openLaunchByName(String name) {
-		for (ElementHandle e : getAllRows()){
+		for (Locator e : getAllRows()){
 			if (hasMatch(e, name)){
-				e.querySelector(launchNameColumn).click();
+				e.locator(launchNameColumn).click();
 				break;
 			}
 		}
@@ -73,28 +61,28 @@ public class LaunchTable extends TableComponent {
 
 
 
-	private Launch buildLaunchWithElementHandle(ElementHandle elementHandle) {
-		return Launch.builder().name(getTextContentFromElementHandle(elementHandle, launchNameColumn)).startTime(
-				getTextContentFromElementHandle(elementHandle, startTimeColumn)).total(
-				getTextContentFromElementHandle(elementHandle, totalColumn)).passed(
-				getTextContentFromElementHandle(elementHandle, passedColumn)).failed(
-				getTextContentFromElementHandle(elementHandle, failedColumn)).skipped(
-				getTextContentFromElementHandle(elementHandle, skippedColumn)).productBug(
-				getTextContentFromElementHandle(elementHandle, productBugColumn)).autoBug(
-				getTextContentFromElementHandle(elementHandle, autoBugColumn)).systemIssue(
-				getTextContentFromElementHandle(elementHandle, systemIssueColumn)).toInvestigate(
-				getTextContentFromElementHandle(elementHandle, toInvestigateColumn)).build();
+	private Launch buildLaunch(Locator row) {
+		return Launch.builder().name(getTextContent(row, launchNameColumn)).startTime(
+				getTextContent(row, startTimeColumn)).total(
+				getTextContent(row, totalColumn)).passed(
+				getTextContent(row, passedColumn)).failed(
+				getTextContent(row, failedColumn)).skipped(
+				getTextContent(row, skippedColumn)).productBug(
+				getTextContent(row, productBugColumn)).autoBug(
+				getTextContent(row, autoBugColumn)).systemIssue(
+				getTextContent(row, systemIssueColumn)).toInvestigate(
+				getTextContent(row, toInvestigateColumn)).build();
 	}
 
-	private String getTextContentFromElementHandle(ElementHandle elementHandle, String querySelector) {
+	private String getTextContent(Locator locator, String querySelector) {
 		try {
-			return elementHandle.querySelector(querySelector).textContent();
+			return locator.locator(querySelector).textContent();
 		} catch (NullPointerException e) {
 			return "";
 		}
 	}
 
-	private boolean hasMatch(ElementHandle e, String name) {
-		return e.querySelector(launchNameColumn).textContent().equals(name);
+	private boolean hasMatch(Locator e, String name) {
+		return e.locator(launchNameColumn).textContent().equals(name);
 	}
 }

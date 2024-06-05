@@ -9,20 +9,21 @@ import tests.base.BaseUiTest;
 
 
 public class MoveToLaunchUiTest extends BaseUiTest {
-
 	private LaunchPage launchPage;
-
+	private LoginPage loginPage;
+	private MainPage mainPage;
+	private LaunchesListPage launchesListPage;
 
 	@BeforeMethod
 	public void beforeMethod() {
+		loginPage = new LoginPage();
+		mainPage = new MainPage();
+		launchesListPage = new LaunchesListPage();
 		launchPage = new LaunchPage();
 	}
 
 	@Test(description = "User is able to move to appropriate launch view clicking on total/passed/failed/skipped")
 	public void validateUserIsAbleToMoveToAppropriateLaunchUi() {
-		LoginPage loginPage = new LoginPage();
-		MainPage mainPage = new MainPage();
-		LaunchesListPage launchesListPage = new LaunchesListPage();
 		User testUser = User.builder().name("testuser5").password("testpassword5").build();
 
 		loginPage.login(testUser);

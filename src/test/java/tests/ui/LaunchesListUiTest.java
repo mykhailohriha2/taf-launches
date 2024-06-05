@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.reportportal.launches.models.Launch;
@@ -16,12 +17,19 @@ import tests.base.BaseUiTest;
 
 
 public class LaunchesListUiTest extends BaseUiTest {
+	private LoginPage loginPage;
+	private MainPage mainPage;
+	private LaunchesListPage launchesListPage;
+
+	@BeforeMethod
+	public void beforeMethod() {
+		loginPage = new LoginPage();
+		mainPage = new MainPage();
+		launchesListPage = new LaunchesListPage();
+	}
 
 	@Test(description = "User is able to see launches list sorted by most recent")
 	public void validateUserIsAbleToSeeLaunchesListSortedByMostRecentUi() {
-		LoginPage loginPage = new LoginPage();
-		MainPage mainPage = new MainPage();
-		LaunchesListPage launchesListPage = new LaunchesListPage();
 		User testUser = User.builder().name("testuser1").password("testpassword1").build();
 
 		loginPage.login(testUser);
