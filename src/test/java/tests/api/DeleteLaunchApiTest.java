@@ -36,7 +36,7 @@ public class DeleteLaunchApiTest extends BaseApiTest {
 
 		List<Integer> expectedIds = getAllLaunchesIds(user.getDefaultProject());
 
-		assertThat(currentIds).isEqualTo(expectedIds);
+		assertThat(currentIds).as("ID is not as expected").isEqualTo(expectedIds);
 	}
 
 	@Test(description = "User is able to remove launch by id via DELETE request")
@@ -54,7 +54,7 @@ public class DeleteLaunchApiTest extends BaseApiTest {
 
 		List<Integer> expectedIds = getAllLaunchesIds(user.getDefaultProject());
 
-		assertThat(currentIds).isEqualTo(expectedIds);
+		assertThat(currentIds).as("ID is not as expected").isEqualTo(expectedIds);
 	}
 
 	private List<Integer> getAllLaunchesIds(String project) {

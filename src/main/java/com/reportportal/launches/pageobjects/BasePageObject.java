@@ -23,8 +23,8 @@ public abstract class BasePageObject {
 		return page.locator(selector);
 	}
 
-	public List<ElementHandle> getAllByLocator(String selector) {
-		return page.querySelectorAll(selector);
+	public List<Locator> getAllByLocator(String selector) {
+		return page.locator(selector).all();
 	}
 
 	public Locator getByText(String selector) {

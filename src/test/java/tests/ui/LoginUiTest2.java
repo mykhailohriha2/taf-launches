@@ -18,21 +18,20 @@ import tests.base.BaseUiTest;
 
 // This test class was created only to test parallel execution. Will be deleted after expanding the test suite
 public class LoginUiTest2 extends BaseUiTest {
-
 	private LoginPage loginPage;
 	private MainPage mainPage;
-
-	@DataProvider(name = "users", parallel = true)
-	public Object[][] createData() {
-		String csvFile = "./src/test/resources/testData.csv";
-		List<Object[]> list = FileUtils.readFromCsvFile(csvFile);
-		return list.toArray(new Object[list.size()][]);
-	}
 
 	@BeforeMethod
 	public void beforeMethod() {
 		loginPage = new LoginPage();
 		mainPage = new MainPage();
+	}
+
+	@DataProvider(name = "users", parallel = false)
+	public Object[][] createData() {
+		String csvFile = "./src/test/resources/testData.csv";
+		List<Object[]> list = FileUtils.readFromCsvFile(csvFile);
+		return list.toArray(new Object[list.size()][]);
 	}
 
 	@Test(dataProvider = "users")
