@@ -13,6 +13,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aspectj.version>1.9.20</aspectj.version>
+        <suiteXmlFile>src/test/java/suites/ui-parallel.xml</suiteXmlFile>
+        <threadCount>3</threadCount>
     </properties>
 
     <build>
@@ -20,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>3.3.0</version>
                 <configuration>
                     <systemPropertyVariables>
                         <env>chromeLocal</env>
@@ -29,9 +31,16 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/java/suites/ui-main-suite.xml</suiteXmlFile>
-                        <suiteXmlFile>src/test/java/suites/api-main-suite.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <!--suppress UnresolvedMavenProperty -->
+<!--                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
+                        <!--                        <suiteXmlFile>src/test/java/suites/ui-main-suite.xml</suiteXmlFile>-->
+                        <!--                        <suiteXmlFile>src/test/java/suites/api-main-suite.xml</suiteXmlFile>-->
+                        <!--                        <suiteXmlFile>src/test/java/suites/api-parallel.xml</suiteXmlFile>-->
+                        <!--                        <suiteXmlFile>src/test/java/suites/ui-parallel.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
+                    <parallel>classes</parallel>
+                    <threadCount>${threadCount}</threadCount>
                 </configuration>
                 <dependencies>
                     <dependency>
