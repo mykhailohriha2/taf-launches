@@ -48,21 +48,25 @@ public class LaunchesListPage extends BasePage {
 	}
 
 	public void clickTotalByIndex(int index) {
+		launchTable.waitForTableIsLoaded();
 		launchTable.clickTotalByIndex(index);
 		log.info("Click total column by index: " + index);
 	}
 
 	public void clickPassedByIndex(int index) {
+		launchTable.waitForTableIsLoaded();
 		launchTable.clickPassedByIndex(index);
 		log.info("Click passed column by index: " + index);
 	}
 
 	public void clickFailedByIndex(int index) {
+		launchTable.waitForTableIsLoaded();
 		launchTable.clickFailedByIndex(index);
 		log.info("Click failed column by index: " + index);
 	}
 
 	public void clickSkippedByIndex(int index) {
+		launchTable.waitForTableIsLoaded();
 		launchTable.clickSkippedByIndex(index);
 		log.info("Click skipped column by index: " + index);
 	}
