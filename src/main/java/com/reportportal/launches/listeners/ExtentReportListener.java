@@ -1,6 +1,7 @@
 package com.reportportal.launches.listeners;
 
 import static com.reportportal.launches.playwright.PlaywrightFacade.takeScreenshot;
+import static com.reportportal.launches.utils.Slack.sendSlackNotification;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -44,6 +45,7 @@ public class ExtentReportListener implements ITestListener {
 	@Override
 	public synchronized void onStart(ITestContext context) {
 		log.info("Test Suite started " + context.getSuite().getName());
+		sendSlackNotification(String.format("TEST RUN STARTED - *%s*", context.getSuite().getName()), "#FFFFFF");
 	}
 
 	@Override
@@ -51,6 +53,18 @@ public class ExtentReportListener implements ITestListener {
 		log.info("Test Suite is ending " + context.getSuite().getName());
 		extent.flush();
 		test.remove();
+		String suiteName = context.getSuite().getName();
+		String suiteResult;
+		String suiteResultColor;
+		if(context.getFailedTests().size() > 0) {
+			suiteResult = "*FAILED*";
+			suiteResultColor = "danger";
+		}
+		else {
+			suiteResult = "*PASS*";
+			suiteResultColor = "good";
+		}
+		sendSlackNotification(String.format("TEST RUN COMPLETED - *%s*. The RESULT is - %s", suiteName, suiteResult), suiteResultColor);
 	}
 
 	@Override
